@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="ja">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="ja">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="ja"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Cubic補間 | シキノート</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="http://slpr.sakura.ne.jp/qp/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="http://slpr.sakura.ne.jp/qp/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link href="https://fonts.gstatic.com/" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="シキノート » フィード" href="http://slpr.sakura.ne.jp/qp/feed/">
+<link rel="alternate" type="application/rss+xml" title="シキノート » コメントフィード" href="http://slpr.sakura.ne.jp/qp/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="シキノート » Cubic補間 のコメントのフィード" href="http://slpr.sakura.ne.jp/qp/cubic-interpolation/feed/">
+		<script src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/cookie.js"></script><script src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/osd.js"></script><script src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/sdk.js" async="" crossorigin="anonymous"></script><script id="twitter-wjs" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/widgets.js"></script><script async="" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/analytics.js"></script><script id="facebook-jssdk" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/sdk_002.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.4"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="twentyfourteen-jetpack-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/twentyfourteen.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/style_003.css" type="text/css" media="all">
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel="stylesheet" id="child-pages-shortcode-css-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/child-pages-shortcode.css" type="text/css" media="all">
+<link rel="stylesheet" id="wordpress-popular-posts-css-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/wpp.css" type="text/css" media="all">
+<link rel="stylesheet" id="parent-style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/style_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentyfourteen-lato-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/genericons.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentyfourteen-style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/style_004.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentyfourteen-block-style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/blocks.css" type="text/css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://slpr.sakura.ne.jp/qp/wp-content/themes/twentyfourteen/css/ie.css?ver=20140701' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="amazonjs-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/amazonjs.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jetpack.css" type="text/css" media="all">
+<link rel="stylesheet" id="codecolorer-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/codecolorer.css" type="text/css" media="screen">
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery-migrate.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/child-pages-shortcode.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpp_params = {"sampling_active":"0","sampling_rate":"100","ajax_url":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-json\/wordpress-popular-posts\/v1\/popular-posts","ID":"6393","token":"c9c2883d95","debug":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/wpp-5.js"></script>
+<link rel="https://api.w.org/" href="http://slpr.sakura.ne.jp/qp/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://slpr.sakura.ne.jp/qp/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://slpr.sakura.ne.jp/qp/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="LU分解による連立一次方程式の解法" href="http://slpr.sakura.ne.jp/qp/lu-decomposition/">
+<link rel="next" title="ラプラス変換による回路方程式の解" href="http://slpr.sakura.ne.jp/qp/laplace-transform/">
+<meta name="generator" content="WordPress 5.4">
+<link rel="canonical" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/a_009.html">
+<link rel="shortlink" href="https://wp.me/p5vLoM-1F7">
+<link rel="alternate" type="application/json+oembed" href="http://slpr.sakura.ne.jp/qp/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fslpr.sakura.ne.jp%2Fqp%2Fcubic-interpolation%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://slpr.sakura.ne.jp/qp/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fslpr.sakura.ne.jp%2Fqp%2Fcubic-interpolation%2F&amp;format=xml">
+<style id="fourteen-colors" type="text/css">
+		/* Custom accent color. */
+		button,
+		.button,
+		.contributor-posts-link,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"],
+		.search-toggle,
+		.hentry .mejs-controls .mejs-time-rail .mejs-time-current,
+		.widget .mejs-controls .mejs-time-rail .mejs-time-current,
+		.hentry .mejs-overlay:hover .mejs-overlay-button,
+		.widget .mejs-overlay:hover .mejs-overlay-button,
+		.widget button,
+		.widget .button,
+		.widget input[type="button"],
+		.widget input[type="reset"],
+		.widget input[type="submit"],
+		.widget_calendar tbody a,
+		.content-sidebar .widget input[type="button"],
+		.content-sidebar .widget input[type="reset"],
+		.content-sidebar .widget input[type="submit"],
+		.slider-control-paging .slider-active:before,
+		.slider-control-paging .slider-active:hover:before,
+		.slider-direction-nav a:hover,
+		.ie8 .primary-navigation ul ul,
+		.ie8 .secondary-navigation ul ul,
+		.ie8 .primary-navigation li:hover > a,
+		.ie8 .primary-navigation li.focus > a,
+		.ie8 .secondary-navigation li:hover > a,
+		.ie8 .secondary-navigation li.focus > a {
+			background-color: #ffbf00;
+		}
+
+		.site-navigation a:hover {
+			color: #ffbf00;
+		}
+
+		::-moz-selection {
+			background: #ffbf00;
+		}
+
+		::selection {
+			background: #ffbf00;
+		}
+
+		.paging-navigation .page-numbers.current {
+			border-color: #ffbf00;
+		}
+
+		@media screen and (min-width: 782px) {
+			.primary-navigation li:hover > a,
+			.primary-navigation li.focus > a,
+			.primary-navigation ul ul {
+				background-color: #ffbf00;
+			}
+		}
+
+		@media screen and (min-width: 1008px) {
+			.secondary-navigation li:hover > a,
+			.secondary-navigation li.focus > a,
+			.secondary-navigation ul ul {
+				background-color: #ffbf00;
+			}
+		}
+	
+			.contributor-posts-link,
+			.button,
+			button,
+			input[type="button"],
+			input[type="reset"],
+			input[type="submit"],
+			.search-toggle:before,
+			.hentry .mejs-overlay:hover .mejs-overlay-button,
+			.widet .mejs-overlay:hover .mejs-overlay-button,
+			.widget button,
+			.widget .button,
+			.widget input[type="button"],
+			.widget input[type="reset"],
+			.widget input[type="submit"],
+			.widget_calendar tbody a,
+			.widget_calendar tbody a:hover,
+			.site-footer .widget_calendar tbody a,
+			.content-sidebar .widget input[type="button"],
+			.content-sidebar .widget input[type="reset"],
+			.content-sidebar .widget input[type="submit"],
+			button:hover,
+			button:focus,
+			.button:hover,
+			.button:focus,
+			.widget a.button:hover,
+			.widget a.button:focus,
+			.widget a.button:active,
+			.content-sidebar .widget a.button,
+			.content-sidebar .widget a.button:hover,
+			.content-sidebar .widget a.button:focus,
+			.content-sidebar .widget a.button:active,
+			.contributor-posts-link:hover,
+			.contributor-posts-link:active,
+			input[type="button"]:hover,
+			input[type="button"]:focus,
+			input[type="reset"]:hover,
+			input[type="reset"]:focus,
+			input[type="submit"]:hover,
+			input[type="submit"]:focus,
+			.slider-direction-nav a:hover:before,
+			.ie8 .primary-navigation li:hover > a,
+			.ie8 .primary-navigation li.focus > a,
+			.ie8 .secondary-navigation li:hover > a,
+			.ie8 .secondary-navigation li.focus > a {
+				color: #2b2b2b;
+			}
+
+			@media screen and (min-width: 782px) {
+				.site-navigation li .current_page_item > a,
+				.site-navigation li .current_page_ancestor > a,
+				.site-navigation li .current-menu-item > a,
+				.site-navigation li .current-menu-ancestor > a,
+				.primary-navigation ul ul a,
+				.primary-navigation li:hover > a,
+				.primary-navigation li.focus > a,
+				.primary-navigation ul ul {
+					color: #2b2b2b;
+				}
+			}
+
+			@media screen and (min-width: 1008px) {
+				.secondary-navigation ul ul a,
+				.secondary-navigation li:hover > a,
+				.secondary-navigation li.focus > a,
+				.secondary-navigation ul ul {
+					color: #2b2b2b;
+				}
+			}
+
+			::selection {
+				color: #2b2b2b;
+			}
+
+			::-moz-selection {
+				color: #2b2b2b;
+			}
+
+			.hentry .mejs-controls .mejs-time-rail .mejs-time-loaded,
+			.widget .mejs-controls .mejs-time-rail .mejs-time-loaded {
+				background-color: #2b2b2b;
+			}
+
+		
+		/* Generated variants of custom accent color. */
+		a,
+		.content-sidebar .widget a {
+			color: #a56500;
+		}
+
+		.contributor-posts-link:hover,
+		.button:hover,
+		.button:focus,
+		.slider-control-paging a:hover:before,
+		.search-toggle:hover,
+		.search-toggle.active,
+		.search-box,
+		.widget_calendar tbody a:hover,
+		button:hover,
+		button:focus,
+		input[type="button"]:hover,
+		input[type="button"]:focus,
+		input[type="reset"]:hover,
+		input[type="reset"]:focus,
+		input[type="submit"]:hover,
+		input[type="submit"]:focus,
+		.widget button:hover,
+		.widget .button:hover,
+		.widget button:focus,
+		.widget .button:focus,
+		.widget input[type="button"]:hover,
+		.widget input[type="button"]:focus,
+		.widget input[type="reset"]:hover,
+		.widget input[type="reset"]:focus,
+		.widget input[type="submit"]:hover,
+		.widget input[type="submit"]:focus,
+		.content-sidebar .widget input[type="button"]:hover,
+		.content-sidebar .widget input[type="button"]:focus,
+		.content-sidebar .widget input[type="reset"]:hover,
+		.content-sidebar .widget input[type="reset"]:focus,
+		.content-sidebar .widget input[type="submit"]:hover,
+		.content-sidebar .widget input[type="submit"]:focus,
+		.ie8 .primary-navigation ul ul a:hover,
+		.ie8 .primary-navigation ul ul li.focus > a,
+		.ie8 .secondary-navigation ul ul a:hover,
+		.ie8 .secondary-navigation ul ul li.focus > a {
+			background-color: #ffdc1d;
+		}
+
+		.featured-content a:hover,
+		.featured-content .entry-title a:hover,
+		.widget a:hover,
+		.widget-title a:hover,
+		.widget_twentyfourteen_ephemera .entry-meta a:hover,
+		.hentry .mejs-controls .mejs-button button:hover,
+		.widget .mejs-controls .mejs-button button:hover,
+		.site-info a:hover,
+		.featured-content a:hover {
+			color: #ffdc1d;
+		}
+
+		a:active,
+		a:hover,
+		.entry-title a:hover,
+		.entry-meta a:hover,
+		.cat-links a:hover,
+		.entry-content .edit-link a:hover,
+		.post-navigation a:hover,
+		.image-navigation a:hover,
+		.comment-author a:hover,
+		.comment-list .pingback a:hover,
+		.comment-list .trackback a:hover,
+		.comment-metadata a:hover,
+		.comment-reply-title small a:hover,
+		.content-sidebar .widget a:hover,
+		.content-sidebar .widget .widget-title a:hover,
+		.content-sidebar .widget_twentyfourteen_ephemera .entry-meta a:hover {
+			color: #c2821d;
+		}
+
+		.page-links a:hover,
+		.paging-navigation a:hover {
+			border-color: #c2821d;
+		}
+
+		.entry-meta .tag-links a:hover:before {
+			border-right-color: #c2821d;
+		}
+
+		.page-links a:hover,
+		.entry-meta .tag-links a:hover {
+			background-color: #c2821d;
+		}
+
+		@media screen and (min-width: 782px) {
+			.primary-navigation ul ul a:hover,
+			.primary-navigation ul ul li.focus > a {
+				background-color: #ffdc1d;
+			}
+		}
+
+		@media screen and (min-width: 1008px) {
+			.secondary-navigation ul ul a:hover,
+			.secondary-navigation ul ul li.focus > a {
+				background-color: #ffdc1d;
+			}
+		}
+
+		button:active,
+		.button:active,
+		.contributor-posts-link:active,
+		input[type="button"]:active,
+		input[type="reset"]:active,
+		input[type="submit"]:active,
+		.widget input[type="button"]:active,
+		.widget input[type="reset"]:active,
+		.widget input[type="submit"]:active,
+		.content-sidebar .widget input[type="button"]:active,
+		.content-sidebar .widget input[type="reset"]:active,
+		.content-sidebar .widget input[type="submit"]:active {
+			background-color: #fff031;
+		}
+
+		.site-navigation .current_page_item > a,
+		.site-navigation .current_page_ancestor > a,
+		.site-navigation .current-menu-item > a,
+		.site-navigation .current-menu-ancestor > a {
+			color: #fff031;
+		}
+	</style>    <style>
+	    .site-content .entry-header,.site-content .entry-content,.site-content .entry-summary,.site-content .entry-meta,.page-content 
+		{max-width: 700px;}.comments-area{max-width: 700px;}.post-navigation, .image-navigation{max-width: 700px;}</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "http://slpr.sakura.ne.jp/qp/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6.4';
+	window._wp_rp_post_id = '6393';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = true;
+	window._wp_rp_post_title = 'Cubic%E8%A3%9C%E9%96%93';
+	window._wp_rp_post_tags = ['%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%A8%E6%95%B0%E5%80%A4', 'alt', 'main', 'point', 'doubl', 'program', 'precis', 'target', 'exit', 'tx', 'titl', 'function', 'cubic', 'posit'];
+	window._wp_rp_promoted_content = true;
+</script>
+<link rel="stylesheet" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/vertical-m.css">
+<style type="text/css">
+.related_post_title {
+}
+ul.related_post {
+}
+ul.related_post li {
+}
+ul.related_post li a {
+}
+ul.related_post li img {
+height:100px;
+width:200px;
+}</style>
+<!-- <meta name="NextGEN" version="3.3.2" /> -->
+
+<link rel="dns-prefetch" href="http://v0.wordpress.com/">
+<style type="text/css">img#wpstats{display:none}</style><style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<!-- BEGIN: WP Social Bookmarking Light HEAD -->
+
+
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<style type="text/css">
+    .wp_social_bookmarking_light{
+    border: 0 !important;
+    padding: 10px 0 20px 0 !important;
+    margin: 0 !important;
+}
+.wp_social_bookmarking_light div{
+    float: left !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 5px 0px 0 !important;
+    min-height: 30px !important;
+    line-height: 18px !important;
+    text-indent: 0 !important;
+}
+.wp_social_bookmarking_light img{
+    border: 0 !important;
+    padding: 0;
+    margin: 0;
+    vertical-align: top !important;
+}
+.wp_social_bookmarking_light_clear{
+    clear: both !important;
+}
+#fb-root{
+    display: none;
+}
+.wsbl_twitter{
+    width: 100px;
+}
+.wsbl_facebook_like iframe{
+    max-width: none !important;
+}
+</style>
+<!-- END: WP Social Bookmarking Light HEAD -->
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style>
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cubic補間">
+<meta property="og:url" content="http://slpr.sakura.ne.jp/qp/cubic-interpolation/">
+<meta property="og:description" content="多項式補間です。 Cubic補間 (1次元) Bicubic補間 (2次元) 補間 (2次元) 参考文献 Cu…">
+<meta property="article:published_time" content="2019-05-25T06:55:10+00:00">
+<meta property="article:modified_time" content="2019-05-25T06:55:10+00:00">
+<meta property="og:site_name" content="シキノート">
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:creator" content="@sikinote">
+<meta name="twitter:text:title" content="Cubic補間">
+<meta name="twitter:card" content="summary">
+
+<!-- End Jetpack Open Graph Tags -->
+			<style type="text/css" id="wp-custom-css">
+				/*
+カスタム CSS 機能へようこそ。
+
+使い方についてはこちらをご覧ください
+(英語ドキュメンテーション)。http://wp.me/PEmnE-Bt
+*/
+.widget_top-posts .widgets-list-layout-blavatar {
+	width: 40%;
+	max-width: 220px;
+}
+
+.widgets-list-layout-links {
+	float: right;
+	width: 55%;
+}
+
+.JPV_thumbnail_title {
+	display: box;
+	vertical-align: middle;
+}
+
+.normalwidth {
+	line-height: 250%;
+}
+
+.displaywidth {
+	line-height: 420%;
+}
+
+hr {
+	height: 2px;
+	border: 0;
+	box-shadow: 0 2px 2px -2px #bbb inset;
+}
+
+ins[style] {
+	background-color: transparent;
+}			</style>
+		
+<!-- Styles cached and displayed inline for speed. Generated by http://stylesplugin.com -->
+<style type="text/css" id="styles-plugin-css">
+@import '//fonts.googleapis.com/css?family=Pontano\2bSans\3aregular';.styles #page{background-color:#fff}.styles .search-toggle,.styles .search-box,.styles .search-toggle.active{background-color:#d93}.styles #page{font-size:14px;font-family:Pontano Sans}.styles #page #masthead{background:#38a1db url()}.styles #page .site-title{font-size:25px}.styles .site-navigation .current-menu-item > a,.styles .site-navigation .current-menu-ancestor > a,.styles .site-navigation .current_page_item > a,.styles .site-navigation .current_page_ancestor > a{background-color:#006dfc!important}.styles .site:before,.styles #secondary{background-color:#3e3a54}.styles .primary-sidebar .widget-title{font-size:15px;color:#efef37}.styles .primary-sidebar .widget{font-size:13px}.styles .primary-sidebar .widget a{color:#fff!important}
+</style>
+	<script>
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-57650857-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+<link rel="stylesheet" id="nextgen_widgets_style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/widgets.css" type="text/css" media="all">
+<link rel="stylesheet" id="nextgen_basic_thumbnails_style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/nextgen_basic_thumbnails.css" type="text/css" media="all">
+<link rel="stylesheet" id="ngg_trigger_buttons-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/trigger_buttons.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-0-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery.css" type="text/css" media="all">
+<link rel="stylesheet" id="fontawesome_v4_shim_style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/v4-shims.css" type="text/css" media="all">
+<link rel="stylesheet" id="fontawesome-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/all.css" type="text/css" media="all">
+<link rel="stylesheet" id="nextgen_pagination_style-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="nggallery-css" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/nggallery.css" type="text/css" media="all">
+<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none; box-sizing: content-box}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_test {font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow: hidden; height: 1px}
+.MathJax_test.mjx-test-display {display: table!important}
+.MathJax_test.mjx-test-inline {display: inline!important; margin-right: -1px}
+.MathJax_test.mjx-test-default {display: block!important; clear: both}
+.MathJax_ex_box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
+.MathJax_em_box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60em}
+.mjx-test-inline .MathJax_left_box {display: inline-block; width: 0; float: left}
+.mjx-test-inline .MathJax_right_box {display: inline-block; width: 0; float: right}
+.mjx-test-display .MathJax_right_box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+</style><link rel="preload" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/integrator_002.js" as="script"><script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/integrator_002.js"></script><link rel="preload" href="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/integrator.js" as="script"><script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/integrator.js"></script><script charset="utf-8" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/button.js"></script><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+
+<body class="post-template-default single single-post postid-6393 single-format-standard styles group-blog header-image footer-widgets singular"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+<div id="page" class="hfeed site" style="height: auto !important;">
+		<div id="site-header">
+		<a href="http://slpr.sakura.ne.jp/qp/" rel="home">
+			<img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/cropped-cropped-73c92a47e13a1d0fff850bfce770e7701.jpg" alt="シキノート" width="1260" height="239">
+		</a>
+	</div>
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="http://slpr.sakura.ne.jp/qp/" rel="home">シキノート</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">検索</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">メインメニュー</button>
+				<a class="screen-reader-text skip-link" href="#content">コンテンツへスキップ</a>
+				<div id="primary-menu" class="nav-menu"><ul>
+<li class="page_item page-item-4900"><a href="http://slpr.sakura.ne.jp/qp/comicmarket-c93/">弾道計算本について</a></li>
+<li class="page_item page-item-93 page_item_has_children"><a href="http://slpr.sakura.ne.jp/qp/">ようこそ</a>
+<ul class="children">
+	<li class="page_item page-item-2628"><a href="http://slpr.sakura.ne.jp/qp/home/bullet/">弾道計算</a></li>
+	<li class="page_item page-item-6021"><a href="http://slpr.sakura.ne.jp/qp/home/runge-kutta-method/">ルンゲ=クッタ法</a></li>
+	<li class="page_item page-item-2712"><a href="http://slpr.sakura.ne.jp/qp/home/gnuplot/">gnuplot</a></li>
+	<li class="page_item page-item-109"><a href="http://slpr.sakura.ne.jp/qp/home/physics/">物理学</a></li>
+	<li class="page_item page-item-6101"><a href="http://slpr.sakura.ne.jp/qp/home/lagrange-eom/">ラグランジュの運動方程式</a></li>
+	<li class="page_item page-item-107"><a href="http://slpr.sakura.ne.jp/qp/home/program/">プログラミングと数値計算</a></li>
+	<li class="page_item page-item-105"><a href="http://slpr.sakura.ne.jp/qp/home/mathematics/">数学</a></li>
+	<li class="page_item page-item-117"><a href="http://slpr.sakura.ne.jp/qp/home/wordpress/">WordPressについて</a></li>
+	<li class="page_item page-item-203"><a href="http://slpr.sakura.ne.jp/qp/home/linux/">Linux</a></li>
+	<li class="page_item page-item-873"><a href="http://slpr.sakura.ne.jp/qp/home/game/">ゲーム</a></li>
+	<li class="page_item page-item-2622"><a href="http://slpr.sakura.ne.jp/qp/home/unclassified/">その他</a></li>
+</ul>
+</li>
+<li class="page_item page-item-1747"><a href="http://slpr.sakura.ne.jp/qp/about/">連絡先と著作権について</a></li>
+</ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get" class="search-form" action="http://slpr.sakura.ne.jp/qp/">
+				<label>
+					<span class="screen-reader-text">検索:</span>
+					<input type="search" class="search-field" placeholder="検索 …" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="検索">
+			</form>			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main" style="height: auto !important;">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			<!--
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9434026466705675"
+     data-ad-slot="5706635148"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> -->
+	
+<!-- 自動広告　-->
+<script async="" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-9434026466705675",
+          enable_page_level_ads: true
+     });
+</script>
+			
+<hr>
+
+			
+<article id="post-6393" class="post-6393 post type-post status-publish format-standard hentry category-program">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="http://slpr.sakura.ne.jp/qp/category/program/" rel="category tag">プログラミングと数値計算</a></span>
+		</div>
+		<h1 class="entry-title">Cubic補間</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="http://slpr.sakura.ne.jp/qp/cubic-interpolation/" rel="bookmark"><time class="entry-date" datetime="2019-05-25T15:55:10+09:00">2019年5月25日</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="http://slpr.sakura.ne.jp/qp/author/sikino/" rel="author">sikino</a></span></span>			<span class="comments-link"><a href="http://slpr.sakura.ne.jp/qp/cubic-interpolation/#respond">コメントする</a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>多項式補間です。</p>
+<ul>
+<li><a href="#cubic" title="" target="" rel="noopener noreferrer">Cubic補間 (1次元)</a> <span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-1" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-4" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-5"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-6" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-7" style="font-size: 70.7%; font-family: STIXGeneral;">4</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-8" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">O(h^4)</script></li>
+<li><a href="#bicubic" title="" target="" rel="noopener noreferrer">Bicubic補間 (2次元)</a> <span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-9" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mi" id="MathJax-Span-11" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-12" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-13"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-14" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-15" style="font-size: 70.7%; font-family: STIXGeneral;">4</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-16" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">O(h^4)</script></li>
+<li><a href="#fourpoint" title="" target="" rel="noopener noreferrer">補間 (2次元)</a> <span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-17" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-18"><span class="mi" id="MathJax-Span-19" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-20" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-21"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-22" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-23" style="font-size: 70.7%; font-family: STIXGeneral;">2</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-24" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-3">O(h^2)</script></li>
+<li><a href="#references" title="" target="" rel="noopener noreferrer">参考文献</a></li>
+</ul>
+<p><a name="cubic" id="cubic"></a></p>
+<h2>Cubic補間 (1次元)</h2>
+<hr>
+<p>4点を厳密に通る3次多項式によって関数を補間します。<br>
+概要は以下の図の通りです。<br>
+補間したい点よりも小さいデータ点を2点、大きいデータ点を2点使って補間します。<br>
+いわば小さい区間で区切ったラグランジュ補間です。<br>
+補間は,既知の係数<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-25" style="width: 1.023em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.794em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.94em, 1000.79em, 2.879em, -1000em); top: -2.551em; left: 0em;"><span class="mrow" id="MathJax-Span-26"><span class="msubsup" id="MathJax-Span-27"><span style="display: inline-block; position: relative; width: 0.797em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-28" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-29"><span class="mrow" id="MathJax-Span-30"><span class="mi" id="MathJax-Span-31" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.551em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.27em; border-left: 0px solid; width: 0px; height: 0.897em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-4">a_{i}</script>を用いて関数<br>
+<span class="displaywidth"><span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-5-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-32" style="width: 7.713em; display: inline-block;"><span style="display: inline-block; position: relative; width: 6.122em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(0.716em, 1006.12em, 4.094em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-33"><span class="mstyle" id="MathJax-Span-34"><span class="mrow" id="MathJax-Span-35"><span class="mi" id="MathJax-Span-36" style="font-family: STIXGeneral; font-style: italic;">𝑔</span><span class="mo" id="MathJax-Span-37" style="font-family: STIXGeneral;">(</span><span class="mi" id="MathJax-Span-38" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span class="mo" id="MathJax-Span-39" style="font-family: STIXGeneral;">)</span><span class="mo" id="MathJax-Span-40" style="font-family: STIXGeneral; padding-left: 0.313em;">=</span><span class="munderover" id="MathJax-Span-41" style="padding-left: 0.313em;"><span style="display: inline-block; position: relative; width: 1.292em; height: 0px;"><span style="position: absolute; clip: rect(2.88em, 1001.2em, 4.67em, -1000em); top: -4.025em; left: 0em;"><span class="mo" id="MathJax-Span-42" style="font-family: STIXSizeOneSym; vertical-align: -0.524em;">∑</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.377em, 1001.04em, 4.305em, -1000em); top: -2.875em; left: 0.117em;"><span class="texatom" id="MathJax-Span-43"><span class="mrow" id="MathJax-Span-44"><span class="mi" id="MathJax-Span-45" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-46" style="font-size: 70.7%; font-family: STIXGeneral;">=</span><span class="mn" id="MathJax-Span-47" style="font-size: 70.7%; font-family: STIXGeneral;">0</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.277em, 1000.31em, 4.205em, -1000em); top: -5.225em; left: 0.469em;"><span class="texatom" id="MathJax-Span-48"><span class="mrow" id="MathJax-Span-49"><span class="mn" id="MathJax-Span-50" style="font-size: 70.7%; font-family: STIXGeneral;">3</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-51" style="padding-left: 0.188em;"><span style="display: inline-block; position: relative; width: 0.797em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-52" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-53"><span class="mrow" id="MathJax-Span-54"><span class="mi" id="MathJax-Span-55" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-56"><span style="display: inline-block; position: relative; width: 0.845em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.51em, 4.204em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-57" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.438em; left: 0.55em;"><span class="mi" id="MathJax-Span-58" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.659em; border-left: 0px solid; width: 0px; height: 3.971em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-5">\displaystyle 
+g(x)=\sum_{i=0}^{3}a_{i}x^i 
+</script></span><br>
+誤差は<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-6-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-59" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-60"><span class="mi" id="MathJax-Span-61" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-62" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-63"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-64" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-65" style="font-size: 70.7%; font-family: STIXGeneral;">4</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-66" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-6">O(h^4)</script>です。</p>
+<p><a href="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/d3f79be32106ed9938c9295e12f7c724.jpg"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/d3f79be32106ed9938c9295e12f7c724.jpg" alt="" class="alignnone size-full wp-image-6413" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/d3f79be32106ed9938c9295e12f7c724.jpg 746w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/d3f79be32106ed9938c9295e12f7c724-300x275.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/d3f79be32106ed9938c9295e12f7c724-567x519.jpg 567w" sizes="(max-width: 746px) 100vw, 746px" width="60%" height="60%"></a></p>
+<p>Fortranプログラムはこちら。</p>
+<div class="codecolorer-container fortran default" style="overflow:auto;white-space:nowrap;width:100%;"><div class="fortran codecolorer"><span class="kw1">program</span> main<br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i,N,M</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::x,f,df,df2,s</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw1">allocatable</span><span class="co3">::xdata(:),fdata(:)</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::pi=dacos(-1d0)</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">external</span><span class="co3">::cubic</span><br>
+&nbsp; <br>
+&nbsp; N<span class="sy0">=</span><span class="nu0">30</span><br>
+&nbsp; M<span class="sy0">=</span><span class="nu0">100</span><br>
+&nbsp; <span class="kw1">allocate</span><span class="br0">(</span>xdata<span class="br0">(</span><span class="nu0">0</span><span class="sy0">:</span>N<span class="br0">)</span>,fdata<span class="br0">(</span><span class="nu0">0</span><span class="sy0">:</span>N<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; xdata<span class="sy0">=</span>0d0<br>
+&nbsp; fdata<span class="sy0">=</span>0d0<br>
+&nbsp;<br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">0</span>,N<br>
+&nbsp; &nbsp; &nbsp;xdata<span class="br0">(</span>i<span class="br0">)</span><span class="sy0">=</span><span class="kw4">dble</span><span class="br0">(</span>i<span class="br0">)</span><span class="sy0">*</span>0.1d0<span class="sy0">*</span>pi<br>
+&nbsp; &nbsp; &nbsp;fdata<span class="br0">(</span>i<span class="br0">)</span><span class="sy0">=</span><span class="kw4">sin</span><span class="br0">(</span>xdata<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">write</span><span class="br0">(</span><span class="nu0">10</span>,<span class="sy0">*</span><span class="br0">)</span>xdata<span class="br0">(</span>i<span class="br0">)</span>,fdata<span class="br0">(</span>i<span class="br0">)</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp;<br>
+&nbsp; <span class="co1">! Cubic-spline interpolation given position as point</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">0</span>,M<br>
+&nbsp; &nbsp; &nbsp;x<span class="sy0">=</span><span class="kw4">dble</span><span class="br0">(</span>i<span class="br0">)</span><span class="sy0">*</span>0.03d0<span class="sy0">*</span>pi<span class="sy0">-</span>1d0<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">write</span><span class="br0">(</span><span class="nu0">11</span>,<span class="st0">'(2e20.7e2)'</span><span class="br0">)</span>x,cubic<span class="br0">(</span>x,N,xdata,fdata<span class="br0">)</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp;<br>
+&nbsp; <span class="kw1">stop</span><br>
+<span class="kw1">end</span> <span class="kw1">program</span> main<br>
+<br>
+<span class="kw3">double</span> <span class="kw3">precision</span> <span class="kw1">function</span> cubic<span class="br0">(</span>x,N,x0,f0<span class="br0">)</span><br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">integer</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::N</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::x,f0(0:N),x0(0:N)</span><br>
+&nbsp; <br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i,i0,i1,i2,i3</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::tx &nbsp;</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::a,b,c,d,p,q,r,s,t,u</span><br>
+<br>
+&nbsp; tx <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><br>
+&nbsp; i1 <span class="sy0">=</span> <span class="nu0">0</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">1</span>,N<span class="sy0">-</span><span class="nu0">2</span><br>
+&nbsp; &nbsp; &nbsp;tx <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span>tx.<span class="me1">gt</span>.0d0<span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; i1 <span class="sy0">=</span> i<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">else</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">exit</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <span class="kw1">if</span><span class="br0">(</span>i1.<span class="me1">eq</span>.0<span class="br0">)</span>i1<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; i0<span class="sy0">=</span>i1<span class="sy0">-</span><span class="nu0">1</span><br>
+&nbsp; i2<span class="sy0">=</span>i1<span class="sy0">+</span><span class="nu0">1</span><br>
+&nbsp; i3<span class="sy0">=</span>i1<span class="sy0">+</span><span class="nu0">2</span><br>
+<br>
+&nbsp; a <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i0<span class="br0">)</span><br>
+&nbsp; b <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i1<span class="br0">)</span><br>
+&nbsp; c <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i2<span class="br0">)</span><br>
+&nbsp; d <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i3<span class="br0">)</span> &nbsp;<br>
+&nbsp; <br>
+&nbsp; p <span class="sy0">=</span> x0<span class="br0">(</span>i1<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i0<span class="br0">)</span><br>
+&nbsp; q <span class="sy0">=</span> x0<span class="br0">(</span>i2<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i1<span class="br0">)</span><br>
+&nbsp; r <span class="sy0">=</span> x0<span class="br0">(</span>i3<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i2<span class="br0">)</span><br>
+<br>
+&nbsp; s <span class="sy0">=</span> x0<span class="br0">(</span>i2<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i0<span class="br0">)</span><br>
+&nbsp; t <span class="sy0">=</span> x0<span class="br0">(</span>i3<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i1<span class="br0">)</span><br>
+<br>
+&nbsp; u <span class="sy0">=</span> x0<span class="br0">(</span>i3<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i0<span class="br0">)</span><br>
+<br>
+&nbsp; cubic <span class="sy0">=</span> a<span class="sy0">*</span>c<span class="sy0">*</span><span class="br0">(</span> d<span class="sy0">*</span>f0<span class="br0">(</span>i1<span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>p<span class="sy0">*</span>q<span class="br0">)</span> <span class="sy0">+</span> b<span class="sy0">*</span>f0<span class="br0">(</span>i3<span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>u<span class="sy0">*</span>r<span class="br0">)</span> <span class="br0">)</span><span class="sy0">/</span>t <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="sy0">-</span> b<span class="sy0">*</span>d<span class="sy0">*</span><span class="br0">(</span> c<span class="sy0">*</span>f0<span class="br0">(</span>i0<span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>p<span class="sy0">*</span>u<span class="br0">)</span> <span class="sy0">+</span> a<span class="sy0">*</span>f0<span class="br0">(</span>i2<span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>q<span class="sy0">*</span>r<span class="br0">)</span> <span class="br0">)</span><span class="sy0">/</span>s<br>
+&nbsp; <br>
+&nbsp; <span class="kw1">return</span><br>
+<span class="kw1">end</span> <span class="kw1">function</span> cubic</div></div>
+<p><a name="bicubic" id="bicubic"></a></p>
+<h2>Bicubic補間 (2次元)</h2>
+<hr>
+<p>16点を厳密に通る多項式によって関数を補間します。<br>
+補間したい点を囲むように存在する16点を用いて補間します。<br>
+補間は,既知の係数<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-7-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-67" style="width: 1.59em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.247em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.94em, 1001.25em, 3.003em, -1000em); top: -2.551em; left: 0em;"><span class="mrow" id="MathJax-Span-68"><span class="msubsup" id="MathJax-Span-69"><span style="display: inline-block; position: relative; width: 1.249em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-70" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-71"><span class="mrow" id="MathJax-Span-72"><span class="mi" id="MathJax-Span-73" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-74" style="font-size: 70.7%; font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-75" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.551em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.427em; border-left: 0px solid; width: 0px; height: 1.054em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-7">a_{i,j}</script>を用いて関数<br>
+<span class="displaywidth"><span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-8-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-76" style="width: 12.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.864em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(0.716em, 1009.86em, 4.217em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-77"><span class="mstyle" id="MathJax-Span-78"><span class="mrow" id="MathJax-Span-79"><span class="mi" id="MathJax-Span-80" style="font-family: STIXGeneral; font-style: italic;">𝑔</span><span class="mo" id="MathJax-Span-81" style="font-family: STIXGeneral;">(</span><span class="mi" id="MathJax-Span-82" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span class="mo" id="MathJax-Span-83" style="font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-84" style="font-family: STIXGeneral; font-style: italic; padding-left: 0.188em;">𝑦</span><span class="mo" id="MathJax-Span-85" style="font-family: STIXGeneral;">)</span><span class="mo" id="MathJax-Span-86" style="font-family: STIXGeneral; padding-left: 0.313em;">=</span><span class="munderover" id="MathJax-Span-87" style="padding-left: 0.313em;"><span style="display: inline-block; position: relative; width: 1.292em; height: 0px;"><span style="position: absolute; clip: rect(2.88em, 1001.2em, 4.67em, -1000em); top: -4.025em; left: 0em;"><span class="mo" id="MathJax-Span-88" style="font-family: STIXSizeOneSym; vertical-align: -0.524em;">∑</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.377em, 1001.04em, 4.305em, -1000em); top: -2.875em; left: 0.117em;"><span class="texatom" id="MathJax-Span-89"><span class="mrow" id="MathJax-Span-90"><span class="mi" id="MathJax-Span-91" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-92" style="font-size: 70.7%; font-family: STIXGeneral;">=</span><span class="mn" id="MathJax-Span-93" style="font-size: 70.7%; font-family: STIXGeneral;">0</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.277em, 1000.31em, 4.205em, -1000em); top: -5.225em; left: 0.469em;"><span class="texatom" id="MathJax-Span-94"><span class="mrow" id="MathJax-Span-95"><span class="mn" id="MathJax-Span-96" style="font-size: 70.7%; font-family: STIXGeneral;">3</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="munderover" id="MathJax-Span-97" style="padding-left: 0.188em;"><span style="display: inline-block; position: relative; width: 1.292em; height: 0px;"><span style="position: absolute; clip: rect(2.88em, 1001.2em, 4.67em, -1000em); top: -4.025em; left: 0em;"><span class="mo" id="MathJax-Span-98" style="font-family: STIXSizeOneSym; vertical-align: -0.524em;">∑</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.377em, 1001.1em, 4.427em, -1000em); top: -2.875em; left: 0.09em;"><span class="texatom" id="MathJax-Span-99"><span class="mrow" id="MathJax-Span-100"><span class="mi" id="MathJax-Span-101" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span><span class="mo" id="MathJax-Span-102" style="font-size: 70.7%; font-family: STIXGeneral;">=</span><span class="mn" id="MathJax-Span-103" style="font-size: 70.7%; font-family: STIXGeneral;">0</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.277em, 1000.31em, 4.205em, -1000em); top: -5.225em; left: 0.469em;"><span class="texatom" id="MathJax-Span-104"><span class="mrow" id="MathJax-Span-105"><span class="mn" id="MathJax-Span-106" style="font-size: 70.7%; font-family: STIXGeneral;">3</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-107" style="padding-left: 0.188em;"><span style="display: inline-block; position: relative; width: 1.249em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-108" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-109"><span class="mrow" id="MathJax-Span-110"><span class="mi" id="MathJax-Span-111" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-112" style="font-size: 70.7%; font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-113" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-114"><span style="display: inline-block; position: relative; width: 0.845em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.51em, 4.204em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-115" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.438em; left: 0.55em;"><span class="mi" id="MathJax-Span-116" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-117"><span style="display: inline-block; position: relative; width: 0.846em; height: 0px;"><span style="position: absolute; clip: rect(3.415em, 1000.5em, 4.378em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-118" style="font-family: STIXGeneral; font-style: italic;">𝑦</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.438em; left: 0.496em;"><span class="mi" id="MathJax-Span-119" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.813em; border-left: 0px solid; width: 0px; height: 4.125em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-8">\displaystyle 
+g(x,y)=\sum_{i=0}^{3}\sum_{j=0}^{3}a_{i,j}x^i y^j 
+</script></span><br>
+によって行います[1]。誤差は<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-9-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-120" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-121"><span class="mi" id="MathJax-Span-122" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-123" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-124"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-125" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-126" style="font-size: 70.7%; font-family: STIXGeneral;">4</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-127" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-9">O(h^4)</script>です。</p>
+<p><a href="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/1164f000de30a6f8780bf3bec302fab8.jpg"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/1164f000de30a6f8780bf3bec302fab8.jpg" alt="" class="alignnone size-full wp-image-6414" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/1164f000de30a6f8780bf3bec302fab8.jpg 883w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/1164f000de30a6f8780bf3bec302fab8-300x265.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/1164f000de30a6f8780bf3bec302fab8-768x678.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2019/05/1164f000de30a6f8780bf3bec302fab8-588x519.jpg 588w" sizes="(max-width: 883px) 100vw, 883px" width="60%" height="60%"></a></p>
+<p>Fortranプログラムはこちら。</p>
+<div class="codecolorer-container fortran default" style="overflow:auto;white-space:nowrap;width:100%;"><div class="fortran codecolorer"><span class="kw1">program</span> main<br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i,j</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::Nx,Ny</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::x,y</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::xa,xb,ya,yb</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw1">allocatable</span><span class="co3">::x0(:),y0(:),z0(:,:)</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">external</span><span class="co3">::f,ip16</span><br>
+<br>
+&nbsp; Nx<span class="sy0">=</span><span class="nu0">20</span><br>
+&nbsp; Ny<span class="sy0">=</span><span class="nu0">20</span><br>
+&nbsp; <span class="kw1">allocate</span><span class="br0">(</span>x0<span class="br0">(</span><span class="nu0">0</span><span class="sy0">:</span>Nx<span class="br0">)</span>, y0<span class="br0">(</span><span class="nu0">0</span><span class="sy0">:</span>Ny<span class="br0">)</span>, z0<span class="br0">(</span><span class="nu0">0</span><span class="sy0">:</span>Nx,<span class="nu0">0</span><span class="sy0">:</span>Ny<span class="br0">)</span><span class="br0">)</span><br>
+<br>
+&nbsp; xa<span class="sy0">=-</span>3d0<br>
+&nbsp; xb<span class="sy0">=</span> 3d0<br>
+&nbsp; ya<span class="sy0">=-</span>3d0<br>
+&nbsp; yb<span class="sy0">=</span> 3d0<br>
+&nbsp; &nbsp; <br>
+&nbsp; <span class="co1">! generate references points</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">0</span>,Nx<br>
+&nbsp; &nbsp; &nbsp;x0<span class="br0">(</span>i<span class="br0">)</span><span class="sy0">=</span><span class="kw4">dble</span><span class="br0">(</span>i<span class="br0">)</span><span class="sy0">*</span><span class="br0">(</span>xb<span class="sy0">-</span>xa<span class="br0">)</span><span class="sy0">/</span>Nx<span class="sy0">+</span>xa<br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <span class="kw1">do</span> j<span class="sy0">=</span><span class="nu0">0</span>,Ny<br>
+&nbsp; &nbsp; &nbsp;y0<span class="br0">(</span>j<span class="br0">)</span><span class="sy0">=</span><span class="kw4">dble</span><span class="br0">(</span>j<span class="br0">)</span><span class="sy0">*</span><span class="br0">(</span>yb<span class="sy0">-</span>ya<span class="br0">)</span><span class="sy0">/</span>Ny<span class="sy0">+</span>ya<br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">0</span>,Nx<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">do</span> j<span class="sy0">=</span><span class="nu0">0</span>,Ny<br>
+&nbsp; &nbsp; &nbsp; &nbsp; z0<span class="br0">(</span>i,j<span class="br0">)</span><span class="sy0">=</span>f<span class="br0">(</span>x0<span class="br0">(</span>i<span class="br0">)</span>,y0<span class="br0">(</span>j<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">write</span><span class="br0">(</span><span class="nu0">10</span>,<span class="sy0">*</span><span class="br0">)</span>x0<span class="br0">(</span>i<span class="br0">)</span>,y0<span class="br0">(</span>j<span class="br0">)</span>,z0<span class="br0">(</span>i,j<span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">enddo</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">write</span><span class="br0">(</span><span class="nu0">10</span>,<span class="sy0">*</span><span class="br0">)</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <br>
+&nbsp; <span class="co1">! Return interpolated results</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">0</span>,<span class="nu0">50</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">do</span> j<span class="sy0">=</span><span class="nu0">0</span>,<span class="nu0">50</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; x<span class="sy0">=</span>i<span class="sy0">*</span>0.03d0<span class="sy0">-</span>1d0<br>
+&nbsp; &nbsp; &nbsp; &nbsp; y<span class="sy0">=</span>j<span class="sy0">*</span>0.03d0<span class="sy0">-</span>1d0<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">write</span><span class="br0">(</span><span class="nu0">11</span>,<span class="sy0">*</span><span class="br0">)</span>x,y,ip16<span class="br0">(</span>x,y,Nx,Ny,x0,y0,z0<span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">enddo</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">write</span><span class="br0">(</span><span class="nu0">11</span>,<span class="sy0">*</span><span class="br0">)</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+<br>
+&nbsp; <span class="kw1">stop</span><br>
+<span class="kw1">end</span> <span class="kw1">program</span> main<br>
+<br>
+<span class="kw1">function</span> f<span class="br0">(</span>x,y<span class="br0">)</span><br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::f</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::x,y</span><br>
+&nbsp; <br>
+&nbsp; f<span class="sy0">=</span>x<span class="sy0">*</span>y<span class="sy0">*</span><span class="kw4">exp</span><span class="br0">(</span><span class="sy0">-</span>x<span class="sy0">*</span>x<span class="sy0">-</span>y<span class="sy0">*</span>y<span class="br0">)</span><br>
+&nbsp; <br>
+&nbsp; <span class="kw1">return</span><br>
+<span class="kw1">end</span> <span class="kw1">function</span> f<br>
+<br>
+<span class="kw3">double</span> <span class="kw3">precision</span> <span class="kw1">function</span> ip16<span class="br0">(</span>x,y,Nx,Ny,x0,y0,z0<span class="br0">)</span><br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">integer</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::Nx,Ny</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::x,y,x0(0:Nx),y0(0:Ny),z0(0:Nx,0:Ny)</span><br>
+&nbsp; <span class="co1">!</span><br>
+&nbsp; <span class="co1">! Bicubic interpolation</span><br>
+&nbsp; <span class="co1">! &nbsp; x0,y0 are sorted by ascending order,</span><br>
+&nbsp; <span class="co1">! &nbsp; suppose x0 &amp; y0 are equal interval.</span><br>
+&nbsp; <span class="co1">! &nbsp; z0(x0,y0)</span><br>
+&nbsp; <span class="co1">!</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i,j</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i0,i1,i2,i3</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::j0,j1,j2,j3</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::tx,u,u2,u3</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::ty,v,v2,v3</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::a00,a01,a02,a03,a10,a11,a12,a13</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::a20,a21,a22,a23,a30,a31,a32,a33</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::p(0:3,0:3)</span><br>
+&nbsp; <br>
+&nbsp; <span class="kw1">if</span><span class="br0">(</span>Nx.<span class="me1">le</span>.3.<span class="me1">or</span>.<span class="me1">Ny</span>.<span class="me1">le</span>.3<span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">write</span><span class="br0">(</span><span class="nu0">6</span>,<span class="sy0">*</span><span class="br0">)</span><span class="st0">" *** Error at ip16"</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">stop</span><br>
+&nbsp; <span class="kw1">endif</span><br>
+&nbsp; <br>
+&nbsp; tx <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><br>
+&nbsp; i1 <span class="sy0">=</span> <span class="nu0">0</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">1</span>,Nx<span class="sy0">-</span><span class="nu0">2</span><br>
+&nbsp; &nbsp; &nbsp;tx <span class="sy0">=</span> x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span>tx.<span class="me1">gt</span>.0d0<span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; i1 <span class="sy0">=</span> i<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">else</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">exit</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <span class="kw1">if</span><span class="br0">(</span>i1.<span class="me1">eq</span>.0<span class="br0">)</span>i1<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; i0<span class="sy0">=</span>i1<span class="sy0">-</span><span class="nu0">1</span><br>
+&nbsp; i2<span class="sy0">=</span>i1<span class="sy0">+</span><span class="nu0">1</span><br>
+&nbsp; i3<span class="sy0">=</span>i1<span class="sy0">+</span><span class="nu0">2</span><br>
+<br>
+&nbsp; ty <span class="sy0">=</span> y<span class="sy0">-</span>y0<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span><br>
+&nbsp; j1 <span class="sy0">=</span> <span class="nu0">0</span><br>
+&nbsp; <span class="kw1">do</span> j<span class="sy0">=</span><span class="nu0">1</span>,Ny<span class="sy0">-</span><span class="nu0">2</span><br>
+&nbsp; &nbsp; &nbsp;ty <span class="sy0">=</span> y<span class="sy0">-</span>y0<span class="br0">(</span>j<span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span>ty.<span class="me1">gt</span>.0d0<span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; j1 <span class="sy0">=</span> j<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">else</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">exit</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; <span class="kw1">if</span><span class="br0">(</span>j1.<span class="me1">eq</span>.0<span class="br0">)</span>j1<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; j0<span class="sy0">=</span>j1<span class="sy0">-</span><span class="nu0">1</span><br>
+&nbsp; j2<span class="sy0">=</span>j1<span class="sy0">+</span><span class="nu0">1</span><br>
+&nbsp; j3<span class="sy0">=</span>j1<span class="sy0">+</span><span class="nu0">2</span><br>
+<br>
+&nbsp; <br>
+&nbsp; p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i0,j0<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i0,j1<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i0,j2<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i0,j3<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i1,j0<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i1,j1<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i1,j2<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i1,j3<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i2,j0<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i2,j1<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i2,j2<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i2,j3<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i3,j0<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i3,j1<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i3,j2<span class="br0">)</span><br>
+&nbsp; p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">=</span> z0<span class="br0">(</span>i3,j3<span class="br0">)</span><br>
+&nbsp; &nbsp; <br>
+&nbsp; a00 <span class="sy0">=</span> p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span><br>
+&nbsp; a01 <span class="sy0">=</span> <span class="sy0">-</span>0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span><br>
+&nbsp; a02 <span class="sy0">=</span> p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 2.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a03 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a10 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span><br>
+&nbsp; a11 <span class="sy0">=</span> &nbsp;0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span><br>
+&nbsp; a12 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a13 <span class="sy0">=</span> &nbsp;0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a20 <span class="sy0">=</span> p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 2.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">2</span>.<span class="me1">d0</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span><br>
+&nbsp; a21 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span><br>
+&nbsp; a22 <span class="sy0">=</span> &nbsp;p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 2.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 2.0d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 2.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 6.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 2.0d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> &nbsp;5.0d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 4d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a23 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 3.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 3.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> <span class="nu0">3</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a30 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 0.5d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span><br>
+&nbsp; a31 <span class="sy0">=</span> &nbsp;0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span><br>
+&nbsp; a32 <span class="sy0">=</span> <span class="sy0">-</span>0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 3.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 1.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 3.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> <span class="nu0">3</span><span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 0.50d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 1.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; a33 <span class="sy0">=</span> &nbsp;0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">0</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 2.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 2.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">-</span> 2.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">+</span> 2.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">-</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">0</span><span class="br0">)</span> <span class="sy0">+</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">)</span> <span class="sy0">-</span> 0.75d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">2</span><span class="br0">)</span> <span class="sy0">+</span> 0.25d0<span class="sy0">*</span>p<span class="br0">(</span><span class="nu0">3</span>,<span class="nu0">3</span><span class="br0">)</span><br>
+&nbsp; <br>
+&nbsp; <span class="co1">! Parallel translation u,v [0:1]</span><br>
+&nbsp; u &nbsp;<span class="sy0">=</span> <span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>i1<span class="br0">)</span><span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>x0<span class="br0">(</span>i2<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>i1<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; v &nbsp;<span class="sy0">=</span> <span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>j1<span class="br0">)</span><span class="br0">)</span><span class="sy0">/</span><span class="br0">(</span>y0<span class="br0">(</span>j2<span class="br0">)</span><span class="sy0">-</span>y0<span class="br0">(</span>j1<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; u2 <span class="sy0">=</span> u<span class="sy0">*</span>u<br>
+&nbsp; u3 <span class="sy0">=</span> u2<span class="sy0">*</span>u<br>
+&nbsp; v2 <span class="sy0">=</span> v<span class="sy0">*</span>v<br>
+&nbsp; v3 <span class="sy0">=</span> v2<span class="sy0">*</span>v<br>
+&nbsp; ip16<span class="sy0">=</span> &nbsp;<span class="br0">(</span>a00 <span class="sy0">+</span> a01 <span class="sy0">*</span> v <span class="sy0">+</span> a02 <span class="sy0">*</span> v2 <span class="sy0">+</span> a03 <span class="sy0">*</span> v3<span class="br0">)</span> &nbsp; &nbsp; &nbsp;<span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> <span class="br0">(</span>a10 <span class="sy0">+</span> a11 <span class="sy0">*</span> v <span class="sy0">+</span> a12 <span class="sy0">*</span> v2 <span class="sy0">+</span> a13 <span class="sy0">*</span> v3<span class="br0">)</span> <span class="sy0">*</span> u &nbsp;<span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> <span class="br0">(</span>a20 <span class="sy0">+</span> a21 <span class="sy0">*</span> v <span class="sy0">+</span> a22 <span class="sy0">*</span> v2 <span class="sy0">+</span> a23 <span class="sy0">*</span> v3<span class="br0">)</span> <span class="sy0">*</span> u2 <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="sy0">+</span> <span class="br0">(</span>a30 <span class="sy0">+</span> a31 <span class="sy0">*</span> v <span class="sy0">+</span> a32 <span class="sy0">*</span> v2 <span class="sy0">+</span> a33 <span class="sy0">*</span> v3<span class="br0">)</span> <span class="sy0">*</span> u3<br>
+<br>
+&nbsp; <span class="kw1">return</span><br>
+<span class="kw1">end</span> <span class="kw1">function</span> ip16</div></div>
+<p><a name="fourpoint" id="fourpoint"></a></p>
+<h2>補間 (2次元)</h2>
+<hr>
+<p>Bicubic補間の低次元バージョンです。<br>
+補間したい点を囲むように存在する4点を用いて補間します。<br>
+一応Four point Formulaと名づけられています[2]。<br>
+補間は,既知の係数<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-10-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-128" style="width: 1.59em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.247em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.94em, 1001.25em, 3.003em, -1000em); top: -2.551em; left: 0em;"><span class="mrow" id="MathJax-Span-129"><span class="msubsup" id="MathJax-Span-130"><span style="display: inline-block; position: relative; width: 1.249em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-131" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-132"><span class="mrow" id="MathJax-Span-133"><span class="mi" id="MathJax-Span-134" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-135" style="font-size: 70.7%; font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-136" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.551em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.427em; border-left: 0px solid; width: 0px; height: 1.054em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-10">a_{i,j}</script>を用いて関数<br>
+<span class="displaywidth"><span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-11-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-137" style="width: 12.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.864em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(0.716em, 1009.86em, 4.217em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-138"><span class="mstyle" id="MathJax-Span-139"><span class="mrow" id="MathJax-Span-140"><span class="mi" id="MathJax-Span-141" style="font-family: STIXGeneral; font-style: italic;">𝑔</span><span class="mo" id="MathJax-Span-142" style="font-family: STIXGeneral;">(</span><span class="mi" id="MathJax-Span-143" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span class="mo" id="MathJax-Span-144" style="font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-145" style="font-family: STIXGeneral; font-style: italic; padding-left: 0.188em;">𝑦</span><span class="mo" id="MathJax-Span-146" style="font-family: STIXGeneral;">)</span><span class="mo" id="MathJax-Span-147" style="font-family: STIXGeneral; padding-left: 0.313em;">=</span><span class="munderover" id="MathJax-Span-148" style="padding-left: 0.313em;"><span style="display: inline-block; position: relative; width: 1.292em; height: 0px;"><span style="position: absolute; clip: rect(2.88em, 1001.2em, 4.67em, -1000em); top: -4.025em; left: 0em;"><span class="mo" id="MathJax-Span-149" style="font-family: STIXSizeOneSym; vertical-align: -0.524em;">∑</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.377em, 1001.04em, 4.305em, -1000em); top: -2.875em; left: 0.117em;"><span class="texatom" id="MathJax-Span-150"><span class="mrow" id="MathJax-Span-151"><span class="mi" id="MathJax-Span-152" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-153" style="font-size: 70.7%; font-family: STIXGeneral;">=</span><span class="mn" id="MathJax-Span-154" style="font-size: 70.7%; font-family: STIXGeneral;">0</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.277em, 1000.28em, 4.195em, -1000em); top: -5.225em; left: 0.469em;"><span class="texatom" id="MathJax-Span-155"><span class="mrow" id="MathJax-Span-156"><span class="mn" id="MathJax-Span-157" style="font-size: 70.7%; font-family: STIXGeneral;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="munderover" id="MathJax-Span-158" style="padding-left: 0.188em;"><span style="display: inline-block; position: relative; width: 1.292em; height: 0px;"><span style="position: absolute; clip: rect(2.88em, 1001.2em, 4.67em, -1000em); top: -4.025em; left: 0em;"><span class="mo" id="MathJax-Span-159" style="font-family: STIXSizeOneSym; vertical-align: -0.524em;">∑</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.377em, 1001.1em, 4.427em, -1000em); top: -2.875em; left: 0.09em;"><span class="texatom" id="MathJax-Span-160"><span class="mrow" id="MathJax-Span-161"><span class="mi" id="MathJax-Span-162" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span><span class="mo" id="MathJax-Span-163" style="font-size: 70.7%; font-family: STIXGeneral;">=</span><span class="mn" id="MathJax-Span-164" style="font-size: 70.7%; font-family: STIXGeneral;">0</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; clip: rect(3.277em, 1000.28em, 4.195em, -1000em); top: -5.225em; left: 0.469em;"><span class="texatom" id="MathJax-Span-165"><span class="mrow" id="MathJax-Span-166"><span class="mn" id="MathJax-Span-167" style="font-size: 70.7%; font-family: STIXGeneral;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-168" style="padding-left: 0.188em;"><span style="display: inline-block; position: relative; width: 1.249em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.47em, 4.205em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-169" style="font-family: STIXGeneral; font-style: italic;">𝑎</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -3.875em; left: 0.502em;"><span class="texatom" id="MathJax-Span-170"><span class="mrow" id="MathJax-Span-171"><span class="mi" id="MathJax-Span-172" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span class="mo" id="MathJax-Span-173" style="font-size: 70.7%; font-family: STIXGeneral;">,</span><span class="mi" id="MathJax-Span-174" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span></span></span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-175"><span style="display: inline-block; position: relative; width: 0.845em; height: 0px;"><span style="position: absolute; clip: rect(3.414em, 1000.51em, 4.204em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-176" style="font-family: STIXGeneral; font-style: italic;">𝑥</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.438em; left: 0.55em;"><span class="mi" id="MathJax-Span-177" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑖</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-178"><span style="display: inline-block; position: relative; width: 0.846em; height: 0px;"><span style="position: absolute; clip: rect(3.415em, 1000.5em, 4.378em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-179" style="font-family: STIXGeneral; font-style: italic;">𝑦</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.438em; left: 0.496em;"><span class="mi" id="MathJax-Span-180" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑗</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.813em; border-left: 0px solid; width: 0px; height: 4.125em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-11">\displaystyle 
+g(x,y)=\sum_{i=0}^{1}\sum_{j=0}^{1}a_{i,j}x^i y^j 
+</script></span><br>
+によって行います[2]。誤差は<span class="MathJax_Preview" style=""></span><span class="MathJax" id="MathJax-Element-12-Frame" tabindex="0" style=""><nobr><span class="math" id="MathJax-Span-181" style="width: 2.951em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.324em; height: 0px; font-size: 126%;"><span style="position: absolute; clip: rect(1.653em, 1002.28em, 3.011em, -1000em); top: -2.664em; left: 0em;"><span class="mrow" id="MathJax-Span-182"><span class="mi" id="MathJax-Span-183" style="font-family: STIXGeneral; font-style: italic;">𝑂</span><span class="mo" id="MathJax-Span-184" style="font-family: STIXGeneral;">(</span><span class="msubsup" id="MathJax-Span-185"><span style="display: inline-block; position: relative; width: 0.942em; height: 0px;"><span style="position: absolute; clip: rect(3.187em, 1000.48em, 4.206em, -1000em); top: -4.025em; left: 0em;"><span class="mi" id="MathJax-Span-186" style="font-family: STIXGeneral; font-style: italic;">ℎ</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span><span style="position: absolute; top: -4.388em; left: 0.513em;"><span class="mn" id="MathJax-Span-187" style="font-size: 70.7%; font-family: STIXGeneral;">2</span><span style="display: inline-block; width: 0px; height: 4.025em;"></span></span></span></span><span class="mo" id="MathJax-Span-188" style="font-family: STIXGeneral;">)</span></span><span style="display: inline-block; width: 0px; height: 2.664em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.294em; border-left: 0px solid; width: 0px; height: 1.425em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-12">O(h^2)</script>です。</p>
+<div class="codecolorer-container fortran default" style="overflow:auto;white-space:nowrap;width:100%;"><div class="fortran codecolorer"><span class="kw1">function</span> ip4<span class="br0">(</span>x,y,Nx,Ny,x0,y0,z0<span class="br0">)</span><br>
+&nbsp; <span class="kw1">implicit</span> <span class="kw3">none</span><br>
+&nbsp; <span class="kw3">integer</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::Nx,Ny</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span>,<span class="kw3">intent</span><span class="br0">(</span><span class="kw3">in</span><span class="br0">)</span><span class="co3">::x,y,x0(1:Nx),y0(1:Ny),z0(1:Nx,1:Ny)</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::ip4</span><br>
+&nbsp; <span class="co1">!</span><br>
+&nbsp; <span class="co1">! 2D Interpolation, 4-point formula, </span><br>
+&nbsp; <span class="co1">! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xy equal distance grid</span><br>
+&nbsp; <span class="co1">!</span><br>
+&nbsp; <span class="kw3">integer</span><span class="co3">::i,ix0,ix1,iy0,iy1</span><br>
+&nbsp; <span class="kw3">double</span> <span class="kw3">precision</span><span class="co3">::tx,ty,dx,dy,p,q</span><br>
+<br>
+&nbsp; tx<span class="sy0">=</span>1d100<br>
+&nbsp; ix0<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">2</span>,Nx<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span><span class="kw4">abs</span><span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span>.<span class="me1">le</span>.<span class="me1">tx</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; tx<span class="sy0">=</span><span class="kw4">abs</span><span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; ix0<span class="sy0">=</span>i<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span> &nbsp; &nbsp; <br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; tx<span class="sy0">=</span>1d100<br>
+&nbsp; ix1<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">2</span>,Nx<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span>i.<span class="me1">ne</span>.<span class="me1">ix0</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">if</span><span class="br0">(</span><span class="kw4">abs</span><span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span>.<span class="me1">le</span>.<span class="me1">tx</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;tx<span class="sy0">=</span><span class="kw4">abs</span><span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ix1<span class="sy0">=</span>i<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">endif</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+<br>
+&nbsp; ty<span class="sy0">=</span>1d100<br>
+&nbsp; iy0<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">2</span>,Ny<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span><span class="kw4">abs</span><span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span>.<span class="me1">le</span>.<span class="me1">ty</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; ty<span class="sy0">=</span><span class="kw4">abs</span><span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; iy0<span class="sy0">=</span>i<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span> &nbsp; &nbsp; <br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp; ty<span class="sy0">=</span>1d100<br>
+&nbsp; iy1<span class="sy0">=</span><span class="nu0">1</span><br>
+&nbsp; <span class="kw1">do</span> i<span class="sy0">=</span><span class="nu0">2</span>,Ny<br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">if</span><span class="br0">(</span>i.<span class="me1">ne</span>.<span class="me1">iy0</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">if</span><span class="br0">(</span><span class="kw4">abs</span><span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span>.<span class="me1">le</span>.<span class="me1">ty</span><span class="br0">)</span><span class="kw1">then</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ty<span class="sy0">=</span><span class="kw4">abs</span><span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>i<span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iy1<span class="sy0">=</span>i<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">endif</span><br>
+&nbsp; &nbsp; &nbsp;<span class="kw1">endif</span><br>
+&nbsp; <span class="kw1">enddo</span><br>
+&nbsp;<br>
+&nbsp; dx<span class="sy0">=</span>x0<span class="br0">(</span>ix1<span class="br0">)</span><span class="sy0">-</span>x0<span class="br0">(</span>ix0<span class="br0">)</span><br>
+&nbsp; dy<span class="sy0">=</span>y0<span class="br0">(</span>iy1<span class="br0">)</span><span class="sy0">-</span>y0<span class="br0">(</span>iy0<span class="br0">)</span><br>
+&nbsp; p<span class="sy0">=</span><span class="br0">(</span>x<span class="sy0">-</span>x0<span class="br0">(</span>ix0<span class="br0">)</span><span class="br0">)</span><span class="sy0">/</span>dx<br>
+&nbsp; q<span class="sy0">=</span><span class="br0">(</span>y<span class="sy0">-</span>y0<span class="br0">(</span>iy0<span class="br0">)</span><span class="br0">)</span><span class="sy0">/</span>dy<br>
+&nbsp; <br>
+&nbsp; ip4<span class="sy0">=</span><span class="br0">(</span>1d0<span class="sy0">-</span>p<span class="br0">)</span><span class="sy0">*</span><span class="br0">(</span>1d0<span class="sy0">-</span>q<span class="br0">)</span><span class="sy0">*</span>z0<span class="br0">(</span>ix0,iy0<span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp;<span class="sy0">+</span>p<span class="sy0">*</span><span class="br0">(</span>1d0<span class="sy0">-</span>q<span class="br0">)</span><span class="sy0">*</span>z0<span class="br0">(</span>ix1,iy0<span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp;<span class="sy0">+</span><span class="br0">(</span>1d0<span class="sy0">-</span>p<span class="br0">)</span><span class="sy0">*</span>q<span class="sy0">*</span>z0<span class="br0">(</span>ix0,iy1<span class="br0">)</span> <span class="sy0">&amp;</span><br>
+&nbsp; &nbsp; &nbsp;<span class="sy0">+</span>p<span class="sy0">*</span>q<span class="sy0">*</span>z0<span class="br0">(</span>ix1,iy1<span class="br0">)</span><br>
+&nbsp; &nbsp; <br>
+&nbsp; <span class="kw1">return</span><br>
+<span class="kw1">end</span> <span class="kw1">function</span> ip4</div></div>
+<p><a name="references" id="references"></a></p>
+<h2>参考文献</h2>
+<hr>
+<p>[1]<a href="https://www.paulinternet.nl/?page=bicubic">Cubic interpolation</a><br>
+[2]<a href="http://people.math.sfu.ca/~cbm/aands/page_882.htm">Abramowitz and Stegun.<br>
+Handbook of Mathematical Functions.</a></p>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">関連記事</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-5302" data-post-type="none"><a href="http://slpr.sakura.ne.jp/qp/simple-quadpack/" class="wp_rp_thumbnail"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/16.jpg" alt="シンプルQUADPACK" width="150" height="150"></a><a href="http://slpr.sakura.ne.jp/qp/simple-quadpack/" class="wp_rp_title">シンプルQUADPACK</a></li><li data-position="1" data-poid="in-4993" data-post-type="none"><a href="http://slpr.sakura.ne.jp/qp/spline-interpolation/" class="wp_rp_thumbnail"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/spline_eye_c-150x150.jpg" alt="スプライン補間（1, 2次元）" width="150" height="150"></a><a href="http://slpr.sakura.ne.jp/qp/spline-interpolation/" class="wp_rp_title">スプライン補間（1, 2次元）</a></li><li data-position="2" data-poid="in-5304" data-post-type="none"><a href="http://slpr.sakura.ne.jp/qp/technique-numerical-solution/" class="wp_rp_thumbnail"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/RK_improve_t-150x150.png" alt="微分方程式を解く際の計算量の工夫" width="150" height="150"></a><a href="http://slpr.sakura.ne.jp/qp/technique-numerical-solution/" class="wp_rp_title">微分方程式を解く際の計算量の工夫</a></li><li data-position="3" data-poid="in-3703" data-post-type="none"><a href="http://slpr.sakura.ne.jp/qp/gauss-kronrod-quadrature/" class="wp_rp_thumbnail"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/GKeye-150x150.jpg" alt="ガウス=クロンロッド求積法" width="150" height="150"></a><a href="http://slpr.sakura.ne.jp/qp/gauss-kronrod-quadrature/" class="wp_rp_title">ガウス=クロンロッド求積法</a></li><li data-position="4" data-poid="in-2023" data-post-type="none"><a href="http://slpr.sakura.ne.jp/qp/any-diagonal/" class="wp_rp_thumbnail"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/b40d23f64b1b8b84769c09b3e688a651-150x150.jpg" alt="対角化" width="150" height="150"></a><a href="http://slpr.sakura.ne.jp/qp/any-diagonal/" class="wp_rp_title">対角化</a></li></ul></div></div>
+<div class="wp_social_bookmarking_light">
+            <div class="wsbl_hatena_button"><iframe class="hatena-bookmark-button-frame" title="このエントリーをはてなブックマークに追加" scrolling="no" src="javascript:false" style="width: 47px; height: 20px;" width="47" height="20" frameborder="0"></iframe><script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/bookmark_button.js" charset="utf-8" async="async"></script></div>
+            <div class="wsbl_facebook_like"><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div><fb:like href="http://slpr.sakura.ne.jp/qp/cubic-interpolation/" layout="button_count" action="like" width="100" share="false" show_faces="false" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=0&amp;href=http%3A%2F%2Fslpr.sakura.ne.jp%2Fqp%2Fcubic-interpolation%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=false&amp;show_faces=false&amp;width=100"><span style="vertical-align: bottom; width: 69px; height: 20px;"><iframe name="f2f93d322b5d9" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" style="border: medium none; visibility: visible; width: 69px; height: 20px;" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/like.html" class="" width="100px" height="1000px" frameborder="0"></iframe></span></fb:like></div>
+            <div class="wsbl_twitter"><iframe id="twitter-widget-0" scrolling="no" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 74px; height: 20px;" title="Twitter Tweet Button" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/tweet_button.html" data-url="http://slpr.sakura.ne.jp/qp/cubic-interpolation/" frameborder="0"></iframe></div>
+    </div>
+<br class="wp_social_bookmarking_light_clear">
+		
+				
+	</div><!-- .entry-content -->
+	
+	</article><!-- #post-## -->
+		<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">投稿ナビゲーション</h1>
+		<div class="nav-links">
+			<a href="http://slpr.sakura.ne.jp/qp/lu-decomposition/" rel="prev"><span class="meta-nav">前の投稿</span>LU分解による連立一次方程式の解法</a><a href="http://slpr.sakura.ne.jp/qp/laplace-transform/" rel="next"><span class="meta-nav">次の投稿</span>ラプラス変換による回路方程式の解</a>			</div><!-- .nav-links -->
+		</nav><!-- .navigation -->
+		
+<div id="comments" class="comments-area">
+
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">コメントを残す <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://slpr.sakura.ne.jp/qp/cubic-interpolation/#respond" style="display:none;">コメントをキャンセル</a></small></h3><form action="http://slpr.sakura.ne.jp/qp/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate=""><p class="comment-notes"><span id="email-notes">メールアドレスが公開されることはありません。</span> <span class="required">*</span> が付いている欄は必須項目です</p><p class="comment-form-comment"><label for="comment">コメント</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">名前 <span class="required">*</span></label> <input id="author" name="author" type="text" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">メールアドレス <span class="required">*</span></label> <input id="email" name="email" type="email" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">サイト</label> <input id="url" name="url" type="url" size="30" maxlength="200"></p>
+<p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">新しいコメントをメールで通知</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">新しい投稿をメールで受け取る</label></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="コメントを送信"> <input type="hidden" name="comment_post_ID" value="6393" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="6c8f6ea7c1"></p><p style="display: none;"></p><input type="hidden" id="ak_js" name="ak_js" value="1586402642993"></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	
+<aside id="wpp-3" class="widget popular-posts">
+<h1 class="widget-title">人気のページ</h1>
+<!-- WordPress Popular Posts -->
+
+<ul class="wpp-list wpp-list-with-thumbnails">
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/pm3d-colormap/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/eye_gnuplot_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/05/eye_gnuplot_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/05/eye_gnuplot_c-1024x511.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/05/eye_gnuplot_c-1038x519.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/05/eye_gnuplot_c.jpg 1400w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/pm3d-colormap/" class="wpp-post-title" target="_self">gnuplotのカラーマップ</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">125件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/gnuplot/" class="category category-11">gnuplot</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/code-riemann-zeta/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/Rz_eye2_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/06/Rz_eye2_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/06/Rz_eye2_c-768x384.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/06/Rz_eye2_c-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/06/Rz_eye2_c-1038x519.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/06/Rz_eye2_c.jpg 1600w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/code-riemann-zeta/" class="wpp-post-title" target="_self">リーマンのゼータ関数の数値計算コード(複素平面)</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">125件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/program/" class="category category-5">プログラミングと数値計算</a>, <a href="http://slpr.sakura.ne.jp/qp/category/mathematics/" class="category category-7">数学</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/air-resistance/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/2d8607d6af3678c6bcb413bd01089b5f-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/09/2d8607d6af3678c6bcb413bd01089b5f-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/09/2d8607d6af3678c6bcb413bd01089b5f-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/09/2d8607d6af3678c6bcb413bd01089b5f.jpg 1600w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/air-resistance/" class="wpp-post-title" target="_self">球体の空気抵抗と係数</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">91件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/%e5%bc%be%e9%81%93%e8%a8%88%e7%ae%97/" class="category category-22">弾道計算</a>, <a href="http://slpr.sakura.ne.jp/qp/category/physics/" class="category category-6">物理学</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/periodic-analytical/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/periodic_functionseye_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/01/periodic_functionseye_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/01/periodic_functionseye_c-768x384.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/01/periodic_functionseye_c-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/01/periodic_functionseye_c-1038x519.jpg 1038w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/periodic-analytical/" class="wpp-post-title" target="_self">三角波、のこぎり波、矩形波、その他の数式</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">88件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/gnuplot/" class="category category-11">gnuplot</a>, <a href="http://slpr.sakura.ne.jp/qp/category/mathematics/" class="category category-7">数学</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/ctrl-lineheight/" target="_self"><img alt="" class="wpp-thumbnail wpp_featured wpp_def_no_src wpp-lazyloaded" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/no_thumb.html" width="300" height="300"></a>
+<a href="http://slpr.sakura.ne.jp/qp/ctrl-lineheight/" class="wpp-post-title" target="_self">HTMLで行間をちょっとだけ開ける?</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">79件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/wordpress/" class="category category-4">WordPress</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/gnuplot-fitting/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/fitting-eye_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2018/08/fitting-eye_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2018/08/fitting-eye_c-768x384.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2018/08/fitting-eye_c-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2018/08/fitting-eye_c-1038x519.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2018/08/fitting-eye_c.jpg 1200w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/gnuplot-fitting/" class="wpp-post-title" target="_self">gnuplot上で行う任意関数のフィッティング</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">77件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/gnuplot/" class="category category-11">gnuplot</a>, <a href="http://slpr.sakura.ne.jp/qp/category/program/" class="category category-5">プログラミングと数値計算</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/runge-kutta-ex/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/erk4_eye_c-300x147.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/04/erk4_eye_c-300x147.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/04/erk4_eye_c-768x377.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/04/erk4_eye_c-1024x503.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/04/erk4_eye_c-1038x510.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/04/erk4_eye_c.jpg 1805w" width="300" height="147"></a>
+<a href="http://slpr.sakura.ne.jp/qp/runge-kutta-ex/" class="wpp-post-title" target="_self">ルンゲ=クッタ法の説明と刻み幅制御</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">75件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/program/" class="category category-5">プログラミングと数値計算</a>, <a href="http://slpr.sakura.ne.jp/qp/category/%e3%83%ab%e3%83%b3%e3%82%b2%e3%82%af%e3%83%83%e3%82%bf%e6%b3%95/" class="category category-24">ルンゲ=クッタ法</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/gnuplot-animation/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/gnuplot_animationeye_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/11/gnuplot_animationeye_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/11/gnuplot_animationeye_c-768x384.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/11/gnuplot_animationeye_c-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/11/gnuplot_animationeye_c-1038x519.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/11/gnuplot_animationeye_c.jpg 1600w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/gnuplot-animation/" class="wpp-post-title" target="_self">gnuplotとアニメーション</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">65件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/gnuplot/" class="category category-11">gnuplot</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/minify-latex/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/eqsize_eye_c-300x150.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/03/eqsize_eye_c-300x150.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/03/eqsize_eye_c-768x384.jpg 768w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/03/eqsize_eye_c-1024x512.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/03/eqsize_eye_c-1038x519.jpg 1038w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2016/03/eqsize_eye_c.jpg 1200w" width="300" height="150"></a>
+<a href="http://slpr.sakura.ne.jp/qp/minify-latex/" class="wpp-post-title" target="_self">latexで数式全体を小さくする</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">61件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/latex/" class="category category-14">LaTeX</a></span></span>
+</li>
+<li>
+<a href="http://slpr.sakura.ne.jp/qp/rk4/" target="_self"><img class="wpp-thumbnail wpp_featured attachment-medium size-medium wp-post-image wpp-lazyloaded" alt="" sizes="(max-width: 300px) 100vw, 300px" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/rk4_eye_compressed-300x151.jpg" srcset="http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/01/rk4_eye_compressed-300x151.jpg 300w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/01/rk4_eye_compressed-1024x514.jpg 1024w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/01/rk4_eye_compressed-1138x571.jpg 1138w, http://slpr.sakura.ne.jp/qp/wp-content/uploads/2015/01/rk4_eye_compressed.jpg 1200w" width="300" height="151"></a>
+<a href="http://slpr.sakura.ne.jp/qp/rk4/" class="wpp-post-title" target="_self">4次ルンゲ・クッタ法</a>
+ <span class="wpp-meta post-stats"><span class="wpp-views">57件のビュー</span> | <span class="wpp-category">カテゴリ: <a href="http://slpr.sakura.ne.jp/qp/category/program/" class="category category-5">プログラミングと数値計算</a>, <a href="http://slpr.sakura.ne.jp/qp/category/%e3%83%ab%e3%83%b3%e3%82%b2%e3%82%af%e3%83%83%e3%82%bf%e6%b3%95/" class="category category-24">ルンゲ=クッタ法</a></span></span>
+</li>
+</ul>
+
+</aside>
+<aside id="ngg-images-2" class="widget ngg_images"><div class="hslice" id="ngg-webslice"><h1 class="entry-title widget-title">PSO2のスクリーンショット</h1><div class="ngg-widget entry-content">
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150403_213850_000_c.jpg" title=" " data-image-id="3" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150403_213850_000_c.jpg" alt="pso20150403_213850_000_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150403_213850_000_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20121021_221010_001-2_c.jpg" title=" " data-image-id="9" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20121021_221010_001 (2)_c.jpg" alt="pso20121021_221010_001 (2)_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20121021_221010_001-2_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150408_044442_014_c2.jpg" title=" " data-image-id="27" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150408_044442_014_c2.jpg" alt="pso20150408_044442_014_c2.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150408_044442_014_c2.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150412_222603_007_c.jpg" title=" " data-image-id="32" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150412_222603_007_c.jpg" alt="pso20150412_222603_007_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150412_222603_007_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150412_222842_011_c.jpg" title=" " data-image-id="33" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150412_222842_011_c.jpg" alt="pso20150412_222842_011_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150412_222842_011_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150426_013009_011_c.jpg" title=" " data-image-id="34" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150426_013009_011_c.jpg" alt="pso20150426_013009_011_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150426_013009_011_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150430_004950_022_c.jpg" title=" " data-image-id="35" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150430_004950_022_c.jpg" alt="pso20150430_004950_022_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150430_004950_022_c.jpg" width="180" height="120"></a>
+            <a href="http://slpr.sakura.ne.jp/qp/wp-content/gallery/pso2/pso20150517_232739_005_c.jpg" title=" " data-image-id="40" class="ngg-fancybox" rel="8ef5359398287b20a7388118ed656661"><img title="pso20150517_232739_005_c.jpg" alt="pso20150517_232739_005_c.jpg" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/pso20150517_232739_005_c.jpg" width="180" height="120"></a>
+    </div>
+
+</div></aside></div><!-- #content-sidebar -->
+<div id="secondary" style="height: auto !important; min-height: 0px !important;">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary" style="height: auto !important;">
+		<aside id="pages-11" class="widget widget_pages"><h1 class="widget-title">= カタログ =</h1>		<ul>
+			<li class="page_item page-item-4900"><a href="http://slpr.sakura.ne.jp/qp/comicmarket-c93/">弾道計算本について</a></li>
+<li class="page_item page-item-93 page_item_has_children"><a href="http://slpr.sakura.ne.jp/qp/">ようこそ</a>
+<ul class="children">
+	<li class="page_item page-item-2628"><a href="http://slpr.sakura.ne.jp/qp/home/bullet/">弾道計算</a></li>
+	<li class="page_item page-item-6021"><a href="http://slpr.sakura.ne.jp/qp/home/runge-kutta-method/">ルンゲ=クッタ法</a></li>
+	<li class="page_item page-item-2712"><a href="http://slpr.sakura.ne.jp/qp/home/gnuplot/">gnuplot</a></li>
+	<li class="page_item page-item-109"><a href="http://slpr.sakura.ne.jp/qp/home/physics/">物理学</a></li>
+	<li class="page_item page-item-6101"><a href="http://slpr.sakura.ne.jp/qp/home/lagrange-eom/">ラグランジュの運動方程式</a></li>
+	<li class="page_item page-item-107"><a href="http://slpr.sakura.ne.jp/qp/home/program/">プログラミングと数値計算</a></li>
+	<li class="page_item page-item-105"><a href="http://slpr.sakura.ne.jp/qp/home/mathematics/">数学</a></li>
+	<li class="page_item page-item-117"><a href="http://slpr.sakura.ne.jp/qp/home/wordpress/">WordPressについて</a></li>
+	<li class="page_item page-item-203"><a href="http://slpr.sakura.ne.jp/qp/home/linux/">Linux</a></li>
+	<li class="page_item page-item-873"><a href="http://slpr.sakura.ne.jp/qp/home/game/">ゲーム</a></li>
+	<li class="page_item page-item-2622"><a href="http://slpr.sakura.ne.jp/qp/home/unclassified/">その他</a></li>
+</ul>
+</li>
+<li class="page_item page-item-1747"><a href="http://slpr.sakura.ne.jp/qp/about/">連絡先と著作権について</a></li>
+		</ul>
+			</aside><aside id="text-4" class="widget widget_text"><h1 class="widget-title">スポンサーリンク</h1>			<div class="textwidget"><script charset="utf-8" type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/q.txt"> </script> <noscript><A HREF="http://ws-fe.amazon-adsystem.com/widgets/q?rt=tf_mfw&ServiceVersion=20070822&MarketPlace=JP&ID=V20070822%2FJP%2Fsikinote0amzn-22%2F8001%2F06286c27-235b-439e-ad30-fd6215212896&Operation=NoScript">Amazon.co.jp ウィジェット</A></noscript>
+</div>
+		</aside><aside id="text-2" class="widget widget_text"><h1 class="widget-title">※トップ絵</h1>			<div class="textwidget"><p><span style="color:white;">蛙さんからいただきました！</span><br>
+↓クリックでpixivへ<br>
+<a href="http://www.pixiv.net/member.php?id=2159701" title="" target="" rel="noopener noreferrer"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/73c92a47e13a1d0fff850bfce770e770.jpg"></a></p>
+</div>
+		</aside><aside id="text-5" class="widget widget_text" style="height: auto !important;"><div style="width: 100%; height: auto; clear: none; text-align: center;" class="google-auto-placed"><ins style="display: block; margin: 10px auto 48px; background-color: transparent; height: 0px;" data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-9434026466705675" data-adsbygoogle-status="done" data-overlap-observer-io="false"><ins id="aswift_1_expand" style="display: inline-table; border: medium none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent;"><ins id="aswift_1_anchor" style="display: block; border: medium none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent; overflow: hidden; opacity: 0;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left: 0px; position: absolute; top: 0px; border: 0px none; width: 162px; height: 600px; overflow: visible;" width="162" height="600" frameborder="0"></iframe></ins></ins></ins></div><h1 class="widget-title">ライセンス(公開日2018年8月31日以前)</h1>			<div class="textwidget"><p><a href="http://creativecommons.org/licenses/by/4.0/deed.ja" rel="attachment wp-att-2698"><img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/by.png" alt="by" class="alignnone size-full wp-image-2698" width="100%" height="100%"></a></p>
+<p>公開日が2018年8月31日以前のシキノートの内容物は<a href="http://creativecommons.org/licenses/by/4.0/deed.ja">クリエイティブ・コモンズ 表示 4.0 ライセンス</a>の下に提供されています。</p>
+</div>
+		</aside><aside id="text-6" class="widget widget_text" style="height: auto !important;"><div style="width: 100%; height: auto; clear: none; text-align: center;" class="google-auto-placed"><ins style="display: block; margin: 10px auto 48px; background-color: transparent; height: 600px;" data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-9434026466705675" data-adsbygoogle-status="done" data-overlap-observer-io="false"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:162px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:162px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left: 0px; position: absolute; top: 0px; border: 0px none; width: 162px; height: 600px; overflow: visible;" width="162" height="600" frameborder="0"></iframe></ins></ins></ins></div><h1 class="widget-title">ライセンス(公開日2018年9月1日以降)</h1>			<div class="textwidget"><p>公開日が2018年9月1日(1日を含む)以降のシキノートの内容物は<u>企業が絡む営利目的ではない限り</u><a href="http://creativecommons.org/licenses/by/4.0/deed.ja">クリエイティブ・コモンズ 表示 4.0 ライセンス</a>の下に提供されています。</p>
+<p>詳細は<a href="http://slpr.sakura.ne.jp/qp/about/">連絡先とサイトについて</a>へ。</p>
+</div>
+		</aside><div style="width: 162px; height: 608px; clear: both; text-align: center;" class="google-auto-placed"><ins style="display: block; margin: 10px auto; background-color: transparent; height: 608px; width: 162px;" data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-9434026466705675" data-adsbygoogle-status="done" data-overlap-observer-io="false"><ins id="aswift_3_expand" style="display: inline-table; border: medium none; height: 608px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent;"><ins id="aswift_3_anchor" style="display: block; border: medium none; height: 608px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent; overflow: hidden;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left: 0px; position: absolute; top: 0px; border: 0px none; width: 162px; height: 608px; overflow: visible;" width="162" height="608" frameborder="0"></iframe></ins></ins></ins></div>	</div><!-- #primary-sidebar -->
+	
+
+<h7><span style="color:yellow;">更新履歴</span></h7>
+<ul><li>
+2020年4月6日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/zeroinsearch/"> <span style="color:#ffc300;">ゼロ点を探す（二分法、挟み撃ち法、Anderson-Björk法、Brent法、Newton法、Steffensen法）</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2020年2月2日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/comicmarket-c93/"> <span style="color:#ffc300;">弾道計算本について</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2020年1月3日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/bullet-course3/"> <span style="color:#ffc300;">弾道計算(BB弾)のコード</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2019年12月30日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/sed-sh/"> <span style="color:#ffc300;">sedコマンドによるファイルの書き換え</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2019年11月2日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/reflection-bound/"> <span style="color:#ffc300;">動かない壁に対する束縛運動と反射</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2019年10月26日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/de-fourmula/"> <span style="color:#ffc300;">二重指数関数型数値積分</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2019年10月12日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/constraint-condition3/"> <span style="color:#ffc300;">束縛条件下の運動 – 自由度がうまく落とせない運動</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+<li>
+2019年10月9日更新<br>
+<a href="http://slpr.sakura.ne.jp/qp/periodic-analytical/"> <span style="color:#ffc300;">三角波、のこぎり波、矩形波、その他の数式</span></a><br>
+Mod by:sikino<br>
+<!--- 投稿者:sikino --->
+</li>
+</ul>
+<div style="width: 100%; height: auto; clear: both; text-align: center;" class="google-auto-placed"><ins style="display: block; margin: 10px auto; background-color: transparent; height: 0px;" data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-9434026466705675" data-adsbygoogle-status="done" data-overlap-observer-io="false"><ins id="aswift_4_expand" style="display: inline-table; border: medium none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent;"><ins id="aswift_4_anchor" style="display: block; border: medium none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 162px; background-color: transparent; overflow: hidden; opacity: 0;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left: 0px; position: absolute; top: 0px; border: 0px none; width: 162px; height: 600px; overflow: visible;" width="162" height="600" frameborder="0"></iframe></ins></ins></ins></div></div><!-- #secondary -->
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo" style="height: auto !important;">
+
+			
+<div style="width: 100%; height: auto; clear: both; text-align: center;" class="google-auto-placed"><ins style="display: block; margin: 10px auto; background-color: transparent; height: 280px;" data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-9434026466705675" data-adsbygoogle-status="done"><ins id="aswift_5_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"><ins id="aswift_5_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_5" name="aswift_5" style="left: 0px; position: absolute; top: 0px; border: 0px none; width: 1200px; height: 280px; overflow: visible;" width="1200" height="280" frameborder="0"></iframe></ins></ins></ins></div><div id="supplementary">
+	<div id="footer-sidebar" class="footer-sidebar widget-area masonry" role="complementary" style="position: relative; height: 1206px;">
+		<aside id="meta-7" class="widget widget_meta masonry-brick" style="position: absolute; left: 0px; top: 48px;"><h1 class="widget-title">メタ情報</h1>			<ul>
+						<li><a href="http://slpr.sakura.ne.jp/qp/wp-login.php">ログイン</a></li>
+			<li><a href="http://slpr.sakura.ne.jp/qp/feed/">投稿フィード</a></li>
+			<li><a href="http://slpr.sakura.ne.jp/qp/comments/feed/">コメントフィード</a></li>
+			<li><a href="https://ja.wordpress.org/">WordPress.org</a></li>			</ul>
+			</aside><aside id="archives-7" class="widget widget_archive masonry-brick" style="position: absolute; left: 315px; top: 48px;"><h1 class="widget-title">アーカイブ</h1>		<ul>
+				<li><a href="http://slpr.sakura.ne.jp/qp/2019/10/">2019年10月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/07/">2019年7月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/05/">2019年5月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/04/">2019年4月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/03/">2019年3月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/02/">2019年2月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2019/01/">2019年1月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/12/">2018年12月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/09/">2018年9月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/08/">2018年 8月</a>&nbsp;(5)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/07/">2018年7月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/05/">2018年5月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/02/">2018年2月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2018/01/">2018年1月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/11/">2017年11月</a>&nbsp;(6)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/10/">2017年10月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/09/">2017年9月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/08/">2017年 8月</a>&nbsp;(4)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/07/">2017年7月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/06/">2017年6月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/05/">2017年5月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/04/">2017年4月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2017/01/">2017年1月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/12/">2016年12月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/11/">2016年11月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/10/">2016年10月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/09/">2016年9月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/08/">2016年 8月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/07/">2016年7月</a>&nbsp;(6)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/06/">2016年6月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/05/">2016年5月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/04/">2016年4月</a>&nbsp;(1)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/03/">2016年3月</a>&nbsp;(4)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/02/">2016年2月</a>&nbsp;(8)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2016/01/">2016年1月</a>&nbsp;(5)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/12/">2015年12月</a>&nbsp;(5)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/11/">2015年11月</a>&nbsp;(4)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/10/">2015年10月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/09/">2015年9月</a>&nbsp;(4)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/08/">2015年 8月</a>&nbsp;(2)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/07/">2015年7月</a>&nbsp;(3)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/06/">2015年6月</a>&nbsp;(4)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/05/">2015年5月</a>&nbsp;(6)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/04/">2015年4月</a>&nbsp;(12)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/03/">2015年3月</a>&nbsp;(9)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/02/">2015年2月</a>&nbsp;(7)</li>
+	<li><a href="http://slpr.sakura.ne.jp/qp/2015/01/">2015年1月</a>&nbsp;(19)</li>
+		</ul>
+			</aside><aside id="recent-comments-4" class="widget widget_recent_comments masonry-brick" style="position: absolute; left: 630px; top: 48px;"><h1 class="widget-title">最近のコメント</h1><ul id="recentcomments"><li class="recentcomments"><a href="http://slpr.sakura.ne.jp/qp/spline-interpolation/#comment-42071">スプライン補間（1, 2次元）</a> に <span class="comment-author-link">sikino</span> より</li><li class="recentcomments"><a href="http://slpr.sakura.ne.jp/qp/spline-interpolation/#comment-42015">スプライン補間（1, 2次元）</a> に <span class="comment-author-link">jm</span> より</li><li class="recentcomments"><a href="http://slpr.sakura.ne.jp/qp/bullet-course2/#comment-41728">弾道計算(BB弾)の結果</a> に <span class="comment-author-link">sikino</span> より</li><li class="recentcomments"><a href="http://slpr.sakura.ne.jp/qp/bullet-course2/#comment-41721">弾道計算(BB弾)の結果</a> に <span class="comment-author-link">滝口裕章</span> より</li><li class="recentcomments"><a href="http://slpr.sakura.ne.jp/qp/polygon-spirograph/#comment-41578">正多角形とスピログラフの数式</a> に <span class="comment-author-link"><a href="https://site-builder.wiki/posts/11309" rel="external nofollow ugc" class="url">数学の話題 – Site-Builder.wiki</a></span> より</li></ul></aside>	</div><!-- #footer-sidebar -->
+</div><!-- #supplementary -->
+
+			<div class="site-info">
+												<a href="https://ja.wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<!-- ngg_resource_manager_marker --><script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/comment-reply.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/imagesloaded.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/masonry.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery_002.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/functions.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/wp-embed.js"></script>
+<script async="async" type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var photocrati_ajax = {"url":"http:\/\/slpr.sakura.ne.jp\/qp\/index.php?photocrati_ajax=1","wp_home_url":"http:\/\/slpr.sakura.ne.jp\/qp","wp_site_url":"http:\/\/slpr.sakura.ne.jp\/qp","wp_root_url":"http:\/\/slpr.sakura.ne.jp\/qp","wp_plugins_url":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-content\/plugins","wp_content_url":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-content","wp_includes_url":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-includes\/","ngg_param_slug":"nggallery"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/ajax.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+
+var galleries = {};
+galleries.gallery_8ef5359398287b20a7388118ed656661 = {"id":null,"ids":null,"source":"galleries","src":"","container_ids":[],"gallery_ids":[],"album_ids":[],"tag_ids":[],"display_type":"photocrati-nextgen_basic_thumbnails","display":"","exclusions":[],"order_by":"sortorder","order_direction":"ASC","entity_ids":["3","9","27","32","33","34","35","40"],"tagcloud":false,"returns":"included","slug":"widget-ngg-images-2","sortorder":[],"display_settings":{"use_lightbox_effect":true,"images_per_page":8,"number_of_columns":0,"thumbnail_width":120,"thumbnail_height":90,"show_all_in_lightbox":false,"ajax_pagination":0,"use_imagebrowser_effect":false,"template":"\/home\/slpr\/www\/qp\/wp-content\/plugins\/nextgen-gallery\/products\/photocrati_nextgen\/modules\/widget\/templates\/display_gallery.php","display_no_images_error":1,"disable_pagination":true,"show_slideshow_link":false,"slideshow_link_text":"[Show slideshow]","override_thumbnail_settings":0,"thumbnail_quality":"100","thumbnail_crop":1,"thumbnail_watermark":0,"ngg_triggers_display":"never","_errors":[],"display_view":"default","maximum_entity_count":8,"image_type":"full","show_thumbnail_link":false,"image_width":180,"image_height":120,"widget_setting_title":"PSO2\u306e\u30b9\u30af\u30ea\u30fc\u30f3\u30b7\u30e7\u30c3\u30c8","widget_setting_before_widget":"<aside id=\"ngg-images-2\" class=\"widget ngg_images\"><div class=\"hslice\" id=\"ngg-webslice\">","widget_setting_before_title":"<h1 class=\"entry-title widget-title\">","widget_setting_after_widget":"<\/div><\/aside>","widget_setting_after_title":"<\/h1>","widget_setting_width":180,"widget_setting_height":120,"widget_setting_show_setting":"original","widget_setting_widget_id":"ngg-images-2"},"excluded_container_ids":[],"maximum_entity_count":500,"__defaults_set":true,"_errors":[],"ID":"8ef5359398287b20a7388118ed656661"};
+galleries.gallery_8ef5359398287b20a7388118ed656661.wordpress_page_root = "http:\/\/slpr.sakura.ne.jp\/qp\/cubic-interpolation\/";
+var nextgen_lightbox_settings = {"static_path":"http:\/\/slpr.sakura.ne.jp\/qp\/wp-content\/plugins\/nextgen-gallery\/products\/photocrati_nextgen\/modules\/lightbox\/static\/{placeholder}","context":"nextgen_images"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/common.js"></script>
+<script type="text/javascript">
+            var nggLastTimeoutVal = 1000;
+
+			var nggRetryFailedImage = function(img) {
+				setTimeout(function(){
+					img.src = img.src;
+				}, nggLastTimeoutVal);
+			
+				nggLastTimeoutVal += 500;
+			}
+        
+</script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/nextgen_basic_thumbnails.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/lightbox_context.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery_004.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/jquery_003.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/nextgen_fancybox_init.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/v4-shims.js"></script>
+<script type="text/javascript" defer="defer" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous" data-auto-replace-svg="false" data-keep-original-source="false" data-search-pseudo-elements="" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/all.js"></script>
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/MathJax.js"></script>
+        <script type="text/javascript">
+            (function(){
+                document.addEventListener('DOMContentLoaded', function(){
+                    let wpp_widgets = document.querySelectorAll('.popular-posts-sr');
+
+                    if ( wpp_widgets ) {
+                        for (let i = 0; i < wpp_widgets.length; i++) {
+                            let wpp_widget = wpp_widgets[i];
+                            WordPressPopularPosts.theme(wpp_widget);
+                        }
+                    }
+                });
+            })();
+        </script>
+                <script>
+            var WPPImageObserver = null;
+
+            function wpp_load_img(img) {
+                if ( ! 'imgSrc' in img.dataset || ! img.dataset.imgSrc )
+                    return;
+
+                img.src = img.dataset.imgSrc;
+
+                if ( 'imgSrcset' in img.dataset ) {
+                    img.srcset = img.dataset.imgSrcset;
+                    img.removeAttribute('data-img-srcset');
+                }
+
+                img.classList.remove('wpp-lazyload');
+                img.removeAttribute('data-img-src');
+                img.classList.add('wpp-lazyloaded');
+            }
+
+            function wpp_observe_imgs(){
+                let wpp_images = document.querySelectorAll('img.wpp-lazyload'),
+                    wpp_widgets = document.querySelectorAll('.popular-posts-sr');
+
+                if ( wpp_images.length || wpp_widgets.length ) {
+                    if ( 'IntersectionObserver' in window ) {
+                        WPPImageObserver = new IntersectionObserver(function(entries, observer) {
+                            entries.forEach(function(entry) {
+                                if (entry.isIntersecting) {
+                                    let img = entry.target;
+                                    wpp_load_img(img);
+                                    WPPImageObserver.unobserve(img);
+                                }
+                            });
+                        });
+
+                        if ( wpp_images.length ) {
+                            wpp_images.forEach(function(image) {
+                                WPPImageObserver.observe(image);
+                            });
+                        }
+
+                        if ( wpp_widgets.length ) {
+                            for (var i = 0; i < wpp_widgets.length; i++) {
+                                let wpp_widget_images = wpp_widgets[i].querySelectorAll('img.wpp-lazyload');
+
+                                if ( ! wpp_widget_images.length && wpp_widgets[i].shadowRoot ) {
+                                    wpp_widget_images = wpp_widgets[i].shadowRoot.querySelectorAll('img.wpp-lazyload');
+                                }
+
+                                if ( wpp_widget_images.length ) {
+                                    wpp_widget_images.forEach(function(image) {
+                                        WPPImageObserver.observe(image);
+                                    });
+                                }
+                            }
+                        }
+                    } /** Fallback for older browsers */
+                    else {
+                        if ( wpp_images.length ) {
+                            for (var i = 0; i < wpp_images.length; i++) {
+                                wpp_load_img(wpp_images[i]);
+                                wpp_images[i].classList.remove('wpp-lazyloaded');
+                            }
+                        }
+
+                        if ( wpp_widgets.length ) {
+                            for (var j = 0; j < wpp_widgets.length; j++) {
+                                let wpp_widget = wpp_widgets[j],
+                                    wpp_widget_images = wpp_widget.querySelectorAll('img.wpp-lazyload');
+
+                                if ( ! wpp_widget_images.length && wpp_widget.shadowRoot ) {
+                                    wpp_widget_images = wpp_widget.shadowRoot.querySelectorAll('img.wpp-lazyload');
+                                }
+
+                                if ( wpp_widget_images.length ) {
+                                    for (var k = 0; k < wpp_widget_images.length; k++) {
+                                        wpp_load_img(wpp_widget_images[k]);
+                                        wpp_widget_images[k].classList.remove('wpp-lazyloaded');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                wpp_observe_imgs();
+
+                // When an ajaxified WPP widget loads,
+                // Lazy load its images
+                document.addEventListener('wpp-onload', function(){
+                    wpp_observe_imgs();
+                });
+            });
+        </script>
+        
+<!-- BEGIN: WP Social Bookmarking Light FOOTER -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<!-- END: WP Social Bookmarking Light FOOTER -->
+<script type="text/javascript" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/e-202015.js" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.4.1',blog:'81452052',post:'6393',tz:'9',srv:'slpr.sakura.ne.jp'} ]);
+	_stq.push([ 'clickTrackerInit', '81452052', '6393' ]);
+</script>
+
+
+<img src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/g.gif" alt=":)" id="wpstats" width="6" height="5"><div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px none; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; min-width: 0px; max-width: none; padding: 0px; border: 0px none; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: STIXSizeOneSym, sans-serif;"></div></div><iframe scrolling="no" allowtransparency="true" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe><ins class="adsbygoogle adsbygoogle-noablate" style="display: none !important;" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" frameborder="0"></iframe></ins></ins></ins><iframe id="google_osd_static_frame_441576606686" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe></body><iframe id="google_shimpl" style="display: none;"></iframe><iframe id="google_esf" name="google_esf" src="Cubic%E8%A3%9C%E9%96%93%20|%20%E3%82%B7%E3%82%AD%E3%83%8E%E3%83%BC%E3%83%88_files/zrt_lookup.html" style="display: none;" data-ad-client="ca-pub-9434026466705675"></iframe></html>
